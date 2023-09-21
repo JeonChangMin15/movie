@@ -1,4 +1,4 @@
-interface Detail {
+export interface Detail {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
