@@ -1,16 +1,14 @@
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+
 import { MovieList } from "@src/types/query";
 import { ContentT } from "@src/types/state";
-import { Dispatch, Ref, SetStateAction, useEffect, useState } from "react";
 
 export const useInfiniteScroll = (
   data: MovieList | undefined,
   setPage: Dispatch<SetStateAction<number>>
 ) => {
   const [content, setContent] = useState<ContentT[]>([]);
-  const [ref, setRef] = useState(null) as [
-    null,
-    Ref<Dispatch<SetStateAction<null>>> | undefined
-  ];
+  const ref = useRef<HTMLDivElement>(null);
 
   const handleIntersection = (entries: IntersectionObserverEntry[]) => {
     const [entry] = entries;
@@ -24,17 +22,22 @@ export const useInfiniteScroll = (
     const options: IntersectionObserverInit = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.8,
+      threshold: 1,
     };
 
-    let observer: IntersectionObserver;
-    if (ref) {
-      observer = new IntersectionObserver(handleIntersection, options);
-      observer.observe(ref);
+    const observer: IntersectionObserver = new IntersectionObserver(
+      handleIntersection,
+      options
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
     }
 
     return () => {
-      observer && observer.disconnect();
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
     };
   }, [ref]);
 
@@ -50,5 +53,5 @@ export const useInfiniteScroll = (
     setContent((prev) => [...prev, ...info]);
   }, [data?.page]);
 
-  return { content, setRef };
+  return { content, ref };
 };

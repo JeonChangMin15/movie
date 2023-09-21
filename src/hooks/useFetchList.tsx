@@ -21,7 +21,9 @@ const fetchList = async (page: number) => {
 };
 
 export const useFetchList = (page: number) => {
-  const { data } = useQuery<MovieList>(["list", page], () => fetchList(page));
+  const { data, isLoading } = useQuery<MovieList>(["list", page], () =>
+    fetchList(page)
+  );
 
-  return { data };
+  return { data, isLoading };
 };
