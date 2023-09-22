@@ -27,3 +27,18 @@ export const getChartData = (content?: ContentT[]) => {
 
   return arr;
 };
+
+/**
+ * 막대그래프에 랜덤한 색깔을 부여하는 함수
+ * @returns {string}
+ *
+ */
+export const getRandomColor = () => {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+
+  return color;
+};

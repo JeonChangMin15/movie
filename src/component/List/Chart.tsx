@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
 import { ContentT } from "@src/types/state";
-import { getChartData } from "@src/utils/chart";
+import { getChartData, getRandomColor } from "@src/utils/chart";
 
 interface ChartProps {
   content?: ContentT[];
@@ -61,12 +61,14 @@ export const Chart = ({ content }: ChartProps) => {
       .attr("y", (d) => y(d.value))
       .attr("width", x.bandwidth())
       .attr("height", (d) => y(0) - y(d.value))
-      .attr("fill", "steelblue");
+      .attr("fill", () => getRandomColor()); // 랜덤한 색상 할당
   }, [content?.length]);
 
   return (
-    <svg ref={svgRef} width={800} height={300}>
-      {/* 막대 차트가 여기에 그려질 것입니다. */}
-    </svg>
+    <div className="hidden sm:flex justify-center ">
+      <svg ref={svgRef} width={800} height={300}>
+        {/* 막대 차트가 여기에 그려질 것입니다. */}
+      </svg>
+    </div>
   );
 };
