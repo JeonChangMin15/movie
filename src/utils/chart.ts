@@ -1,18 +1,28 @@
+import Ajv from "ajv";
+
 import { GenereID, GENRE } from "@src/constants/gener";
 import { ContentT } from "@src/types/state";
+import { genreSchema } from "./validation";
 
 type DataT = {
-  [key: string]: number[]; // 모든 문자열 키에 대한 값의 타입을 'any'로 지정
+  [key: string]: number[];
 };
 
 export const getChartData = (content?: ContentT[]) => {
+  if (!content) return;
+
   const data: DataT = {};
   const arr = [];
-  if (!content) return;
+
+  const ajv = new Ajv();
+  const validate = ajv.compile(genreSchema);
+
   for (const { genre_ids, vote_average } of content) {
+    const isValid = validate({ genre_ids: genre_ids[0] });
     const id = String(genre_ids[0]) as GenereID;
     const g = GENRE[id];
-    if (!g) continue;
+
+    if (!isValid) continue;
     if (!data[g]) data[g] = [];
 
     data[g].push(vote_average);
@@ -30,7 +40,7 @@ export const getChartData = (content?: ContentT[]) => {
 
 /**
  * 막대그래프에 랜덤한 색깔을 부여하는 함수
- * @returns {string}
+ * @returns {string} 색깔 코드
  *
  */
 export const getRandomColor = () => {

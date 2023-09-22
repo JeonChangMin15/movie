@@ -12,7 +12,7 @@ export const List = () => {
 
   const { data, isLoading } = useFetchList(page);
   const { content, ref } = useInfiniteScroll(data, setPage);
-  console.log("page", page);
+
   return (
     <>
       <Chart content={content} />
