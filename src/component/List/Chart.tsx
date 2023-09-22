@@ -60,14 +60,12 @@ export const Chart = ({ content }: ChartProps) => {
       .attr("y", (d) => y(d.value))
       .attr("width", x.bandwidth())
       .attr("height", (d) => y(0) - y(d.value))
-      .attr("fill", () => getRandomColor()); // 랜덤한 색상 할당
+      .attr("fill", () => getRandomColor());
   }, [content?.length]);
 
   return (
     <div className="hidden sm:flex justify-center ">
-      <svg ref={svgRef} width={800} height={300}>
-        {/* 막대 차트가 여기에 그려질 것입니다. */}
-      </svg>
+      <svg ref={svgRef} width={800} height={300}></svg>
     </div>
   );
 };
