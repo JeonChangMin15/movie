@@ -1,8 +1,8 @@
 import Ajv from "ajv";
 
 import { GenereID, GENRE } from "@src/constants/gener";
+import { genreSchema } from "@src/constants/schema";
 import { ContentT } from "@src/types/state";
-import { genreSchema } from "./validation";
 
 type DataT = {
   [key: string]: number[];
