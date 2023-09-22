@@ -44,11 +44,14 @@ export const useInfiniteScroll = (
   useEffect(() => {
     if (!data?.page) return;
 
-    const info = data.results.map(({ title, poster_path, vote_average }) => ({
-      title,
-      poster_path,
-      vote_average,
-    }));
+    const info = data.results.map(
+      ({ title, poster_path, vote_average, genre_ids }) => ({
+        title,
+        poster_path,
+        vote_average,
+        genre_ids,
+      })
+    );
 
     setContent((prev) => [...prev, ...info]);
   }, [data?.page]);
