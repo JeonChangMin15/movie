@@ -13,7 +13,6 @@ export const Chart = ({ content }: ChartProps) => {
 
   useEffect(() => {
     const chartData = getChartData(content);
-    console.log(chartData);
 
     if (!svgRef.current) return;
     if (!chartData) return;
