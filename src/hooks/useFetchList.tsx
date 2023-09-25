@@ -1,23 +1,18 @@
-import axios from "axios";
+// import axios from "axios";
 import { useQuery } from "react-query";
 
 import { MovieList } from "@src/types/query";
-import { movieOpenApiUrl } from "@src/constants/api";
+
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@src/Firebase";
 
 const fetchList = async (page: number) => {
-  const { data } = await axios.get(movieOpenApiUrl, {
-    headers: {
-      Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
-      Accept: "application/json",
-    },
-    params: {
-      language: "ko-KR",
-      country: "KR",
-      page,
-    },
-  });
+  const docRef = doc(db, "movie_data", `list_${page}`);
 
-  return data;
+  const docSnap = await getDoc(docRef);
+  const documentData = docSnap.data();
+
+  return documentData?.data;
 };
 
 export const useFetchList = (page: number) => {
