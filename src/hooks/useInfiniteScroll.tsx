@@ -12,9 +12,10 @@ export const useInfiniteScroll = (
 
   const handleIntersection = (entries: IntersectionObserverEntry[]) => {
     const [entry] = entries;
+    const MAX_PAGE = 10;
 
     if (entry.isIntersecting) {
-      setPage((prevPage) => prevPage + 1);
+      setPage((prevPage) => (prevPage < MAX_PAGE ? prevPage + 1 : MAX_PAGE));
     }
   };
 
