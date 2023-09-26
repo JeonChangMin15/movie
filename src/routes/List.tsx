@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useFetchList } from "@src/hooks/useFetchList";
 import { useInfiniteScroll } from "@src/hooks/useInfiniteScroll";
 
+import { Input } from "@src/component/List/Input";
 import { Chart } from "@src/component/List/Chart";
 import { Poster } from "@src/component/List/Poster";
 import { Loading } from "@src/component/icon/Loading";
@@ -15,6 +16,7 @@ export const List = () => {
 
   return (
     <>
+      <Input />
       <Chart content={content} />
       <div className="pt-5 px-5 grid grid-cols-1 gap-y-5 sm:grid-cols-2 sm:gap-x-5 lg:grid-cols-4 lg:px-20 lg:gap-9 min-h-screen">
         {content.length > 0 &&

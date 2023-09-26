@@ -14,11 +14,12 @@ export const Detail = () => {
           src={`https://image.tmdb.org/t/p/original${data?.backdrop_path}`}
           className="h-full"
         />
-        <div className="px-4 sm:px-80  absolute bottom-8 z-3 text-white">
+        <div className="px-4  sm:px-40 lg:px-80 absolute bottom-8 z-3 text-white">
           <p className="text-5xl font-semibold mb-2">{data?.title}</p>
           <p className="mb-1">{data?.original_title}</p>
           <div className="flex flex-row gap-x-1 mb-1">
             <span>{data?.release_date.slice(0, 4)}</span>
+            <span>&middot;</span>
             {data?.genres.map(({ name }) => (
               <span key={name}>{name}</span>
             ))}
@@ -35,7 +36,7 @@ export const Detail = () => {
           </span>
         </div>
         <div className="h-[2px] bg-slate-300 w-full my-3"></div>
-        <div className="px-4 sm:px-80 text-zinc-500 font-semibold">
+        <div className="px-4 sm:px-40 lg:px-80 text-zinc-500 font-semibold">
           {data?.overview}
         </div>
       </div>
