@@ -18,7 +18,7 @@ export const Poster = ({
 
   return (
     <div
-      className="flex flex-col gap-y-2 hover:cursor-pointer"
+      className="flex flex-col gap-y-2 hover:cursor-pointer active:shadow-md hover:shadow-md pb-2 rounded-md"
       onClick={() => navigate(`/detail/${movieId}`)}
     >
       <img
@@ -26,11 +26,13 @@ export const Poster = ({
         className="w-full h-60 rounded-md	"
       />
 
-      <div className="flex flex-row justify-between items-center">
+      <div className="flex flex-row justify-between items-center px-1">
         <span className="font-medium">{title}</span>
         <div className="flex gap-x-1 justify-center items-center">
           <Star />
-          <span className="font-semibold text-zinc-500">{vote_average}</span>
+          <span className="font-semibold text-zinc-500">
+            {vote_average.toFixed(1)}
+          </span>
         </div>
       </div>
     </div>
