@@ -19,3 +19,21 @@ export interface MovieList {
   page: number;
   results: Detail[];
 }
+
+export interface MovieInfo {
+  adult: boolean;
+  backdrop_path: string;
+  budget: number;
+  genres: { id: number; name: string }[];
+  id: number;
+  imdb_id: string;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  poster_path: string;
+  release_date: string;
+  runtime: number;
+  tagline: string;
+  title: string;
+  vote_average: number;
+}
