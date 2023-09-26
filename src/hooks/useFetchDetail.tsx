@@ -1,9 +1,11 @@
-import { MovieInfo } from "@src/types/query";
 import axios from "axios";
 import { useQuery } from "react-query";
 
+import { MovieInfo } from "@src/types/query";
+import { movieDetailInfoOpenApiUrl } from "@src/constants/api";
+
 const fetchDetail = async (id: string | undefined) => {
-  const { data } = await axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
+  const { data } = await axios.get(`${movieDetailInfoOpenApiUrl}/${id}`, {
     params: {
       language: "ko-KR",
     },

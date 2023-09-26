@@ -2,21 +2,19 @@ import axios from "axios";
 import { useQuery } from "react-query";
 
 import { MovieList } from "@src/types/query";
+import { movieSearchOpenApiUrl } from "@src/constants/api";
 
 const fetchSearch = async (keyword: string | undefined) => {
-  const { data } = await axios.get(
-    "https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1",
-    {
-      params: {
-        language: "ko-KR",
-        query: keyword,
-      },
-      headers: {
-        Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
-        Accept: "application/json",
-      },
-    }
-  );
+  const { data } = await axios.get(movieSearchOpenApiUrl, {
+    params: {
+      language: "ko-KR",
+      query: keyword,
+    },
+    headers: {
+      Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
+      Accept: "application/json",
+    },
+  });
 
   return data;
 };
