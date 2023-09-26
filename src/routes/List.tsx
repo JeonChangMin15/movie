@@ -18,13 +18,14 @@ export const List = () => {
       <Chart content={content} />
       <div className="pt-5 px-5 grid grid-cols-1 gap-y-5 sm:grid-cols-2 sm:gap-x-5 lg:grid-cols-4 lg:px-20 lg:gap-9 min-h-screen">
         {content.length > 0 &&
-          content.map(({ title, poster_path, vote_average }, index) => {
+          content.map(({ title, poster_path, vote_average, id }, index) => {
             return (
               <Poster
                 key={title + index}
                 title={title}
                 vote_average={vote_average}
                 poster_path={poster_path}
+                movieId={id}
               />
             );
           })}

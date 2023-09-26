@@ -1,14 +1,26 @@
 import { Star } from "../icon/Star";
+import { useNavigate } from "react-router-dom";
 
 interface PosterProps {
   title: string;
   vote_average: number;
   poster_path: string;
+  movieId: number;
 }
 
-export const Poster = ({ title, vote_average, poster_path }: PosterProps) => {
+export const Poster = ({
+  title,
+  vote_average,
+  poster_path,
+  movieId,
+}: PosterProps) => {
+  const navigate = useNavigate();
+
   return (
-    <div className="flex flex-col gap-y-2">
+    <div
+      className="flex flex-col gap-y-2 hover:cursor-pointer"
+      onClick={() => navigate(`/detail/${movieId}`)}
+    >
       <img
         src={`https://image.tmdb.org/t/p/w500${poster_path}`}
         className="w-full h-60 rounded-md	"

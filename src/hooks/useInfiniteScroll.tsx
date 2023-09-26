@@ -46,11 +46,12 @@ export const useInfiniteScroll = (
     if (!data?.page) return;
 
     const info = data.results.map(
-      ({ title, poster_path, vote_average, genre_ids }) => ({
+      ({ title, poster_path, vote_average, genre_ids, id }) => ({
         title,
         poster_path,
         vote_average,
         genre_ids,
+        id,
       })
     );
 
