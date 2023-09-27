@@ -14,7 +14,7 @@ const Detail = () => {
           src={`https://image.tmdb.org/t/p/original${data?.backdrop_path}`}
           className="h-full"
         />
-        <div className="px-4  sm:px-40 lg:px-80 absolute bottom-8 z-3 text-white">
+        <div className="px-4 sm:px-32 lg:px-60 absolute bottom-8 z-3 text-white">
           <p className="text-5xl font-semibold mb-2">{data?.title}</p>
           <p className="mb-1">{data?.original_title}</p>
           <div className="flex flex-row gap-x-1 mb-1">
@@ -36,8 +36,16 @@ const Detail = () => {
           </span>
         </div>
         <div className="h-[2px] bg-slate-300 w-full my-3"></div>
-        <div className="px-4 sm:px-40 lg:px-80 text-zinc-500 font-semibold">
-          {data?.overview}
+        <div className="flex flex-col gap-y-8 sm:flex-row-reverse sm:justify-center sm:px-20 lg:px-40">
+          <div className="px-4 sm:px-10 sm:w-3/5 text-zinc-500 font-semibold">
+            {data?.overview}
+          </div>
+          <div className="flex justify-center">
+            <img
+              src={`https://image.tmdb.org/t/p/w500${data?.poster_path}`}
+              className="w-80 h-[300px] px-6"
+            />
+          </div>
         </div>
       </div>
     </div>
