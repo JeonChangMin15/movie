@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useFetchDetail } from "@src/hooks/useFetchDetail";
 import { getRunningTime } from "@src/utils/time";
 
-export const Detail = () => {
+const Detail = () => {
   const { movieId } = useParams();
   const { data } = useFetchDetail(movieId);
 
@@ -43,3 +43,5 @@ export const Detail = () => {
     </div>
   );
 };
+
+export default Detail;

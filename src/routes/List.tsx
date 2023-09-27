@@ -8,7 +8,7 @@ import { Chart } from "@src/component/List/Chart";
 import { Poster } from "@src/component/List/Poster";
 import { Loading } from "@src/component/icon/Loading";
 
-export const List = () => {
+const List = () => {
   const [page, setPage] = useState(1);
 
   const { data, isLoading } = useFetchList(page);
@@ -37,3 +37,5 @@ export const List = () => {
     </>
   );
 };
+
+export default List;
