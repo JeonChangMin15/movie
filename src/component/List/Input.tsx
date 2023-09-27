@@ -22,7 +22,7 @@ export const Input = () => {
       <div className="h-20 w-full bg-gradient-to-r from-[#e6fbfe] to-[#edddfb]"></div>
       <div className="absolute top-10">
         <input
-          className="focus:outline-0 shadow-md w-[320px] h-16 rounded-lg text-base pl-16" // outline:0, shadow? border도 고려
+          className="outline-0 shadow-xl sm:shadow-md w-[320px] h-16 rounded-lg text-base pl-16"
           placeholder="Search..."
           onChange={handleInputValue}
           onKeyDown={handleKeyDown}
