@@ -37,7 +37,7 @@ const Detail = () => {
         </div>
         <div className="h-[2px] bg-slate-300 w-full my-3"></div>
         <div className="flex flex-col gap-y-8 sm:flex-row-reverse sm:justify-center sm:px-20 lg:px-40">
-          <div className="px-4 sm:px-10 sm:w-3/5 text-zinc-500 font-semibold">
+          <div className="px-4 sm:px-10 sm:w-3/5 lg:w-3/4 text-zinc-500 font-semibold">
             {data?.overview}
           </div>
           <div className="flex justify-center">
