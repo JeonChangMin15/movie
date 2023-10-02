@@ -11,6 +11,7 @@ import { NavBar } from "./component/Nav/NavBar";
 const List = React.lazy(() => import("@src/routes/List"));
 const Detail = React.lazy(() => import("@src/routes/Detail"));
 const Search = React.lazy(() => import("@src/routes/Search"));
+const Auth = React.lazy(() => import("@src/routes/Auth"));
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
   },
   { path: "/detail/:movieId", element: <Detail /> },
   { path: "/search/:keyword", element: <Search /> },
+  { path: "/auth", element: <Auth /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
