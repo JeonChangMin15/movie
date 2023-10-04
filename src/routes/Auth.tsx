@@ -50,6 +50,16 @@ const KaKaoAuth = () => {
           photoURL: userInfo.kakao_account.profile.profile_image_url,
         };
 
+        localStorage.setItem(
+          "nickName",
+          userInfo.kakao_account.profile.nickname
+        );
+
+        localStorage.setItem(
+          "photoURL",
+          userInfo.kakao_account.profile.profile_image_url
+        );
+
         const { data: customToken } = await axios.post(
           cloudFunctionURL,
           userData
