@@ -1,47 +1,14 @@
-// import axios from "axios";
-// import { useEffect } from "react";
-
-// const KaKaoAuth = () => {
-//   const code = new URL(window.location.href).searchParams.get("code");
-
-//   console.log("mycode", code);
-
-//   useEffect(() => {
-//     const getToken = async () => {
-//       const { data } = await axios.post(
-//         "https://kauth.kakao.com/oauth/token",
-//         {
-//           grant_type: "authorization_code",
-//           client_id: import.meta.env.VITE_KAKAO_REST_API_KEY,
-//           redirect_uri: import.meta.env.VITE_REDIRECT_URL,
-//           code,
-//         },
-//         {
-//           headers: {
-//             "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-//           },
-//         }
-//       );
-
-//       return data;
-//     };
-
-//     const accessToken = getToken();
-
-//     console.log("accessToken", accessToken);
-//   }, []);
-//   return <div>카카오 로그인 페이지</div>;
-// };
-
-// export default KaKaoAuth;
-
 import axios from "axios";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { signInWithCustomToken } from "firebase/auth";
+
+import { Loading } from "@src/component/common/Loading";
+import { auth } from "@src/Firebase";
 
 const KaKaoAuth = () => {
+  const navigate = useNavigate();
   const code = new URL(window.location.href).searchParams.get("code");
-
-  console.log("mycode", code);
 
   useEffect(() => {
     const getToken = async () => {
@@ -61,6 +28,8 @@ const KaKaoAuth = () => {
           }
         );
 
+        localStorage.setItem("access_token", data.access_token);
+
         const { data: userInfo } = await axios.post(
           "https://kapi.kakao.com/v2/user/me",
           {},
@@ -71,8 +40,7 @@ const KaKaoAuth = () => {
             },
           }
         );
-        console.log("data", data);
-        console.log("user", userInfo);
+
         const cloudFunctionURL =
           "https://createcustomtoken-n4nx2ygzza-uc.a.run.app";
         const userData = {
@@ -86,16 +54,24 @@ const KaKaoAuth = () => {
           cloudFunctionURL,
           userData
         );
-        console.log("custom", customToken);
+
+        const loginInfo = await signInWithCustomToken(auth, customToken.token);
+
+        navigate("/");
       } catch (error) {
         console.error("Error fetching access token", error);
+        navigate("/");
       }
     };
 
     getToken();
   }, []);
 
-  return <div>카카오 로그인 페이지</div>;
+  return (
+    <div>
+      <Loading />
+    </div>
+  );
 };
 
 export default KaKaoAuth;
