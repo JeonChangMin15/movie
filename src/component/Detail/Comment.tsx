@@ -1,7 +1,8 @@
+import React, { useState } from "react";
+import { FaRegUser } from "react-icons/fa";
+
 import { useFetchComment } from "@src/hooks/useFetchComment";
 import { useMutateComment } from "@src/hooks/useMutateComment";
-
-import React, { useState } from "react";
 
 interface CommentProps {
   movieId?: string;
@@ -18,9 +19,10 @@ export const Comment = ({ movieId }: CommentProps) => {
 
   const handleButton = () => {
     const nickName = localStorage.getItem("nickName") || "";
+    const photoURL = localStorage.getItem("photoURL") || "";
 
     mutate(
-      { info: { nickName, comment }, movieId },
+      { info: { nickName, comment, photoURL }, movieId },
       {
         onSuccess: () => setComment(""),
       }
@@ -36,12 +38,22 @@ export const Comment = ({ movieId }: CommentProps) => {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 my-5 gap-4">
-          {comments?.map(({ nickName, comment }, index) => (
+          {comments?.map(({ nickName, comment, photoURL }, index) => (
             <div
               key={comment + index}
               className="h-40 px-3 py-3 bg-gray-100 break-words"
             >
-              <p className="text-xl">{nickName}</p>
+              <div className="flex items-center gap-x-3">
+                {photoURL ? (
+                  <img src={photoURL} className="w-10 h-10 rounded-full" />
+                ) : (
+                  <div className="flex items-center justify-center bg-gray-300 w-10 h-10 rounded-full">
+                    <FaRegUser />
+                  </div>
+                )}
+
+                <p className="text-xl">{nickName}</p>
+              </div>
               <div className="w-full h-[1px] bg-gray-200 mt-1 mb-1"></div>
               <div>{comment.slice(0, 100)}</div>
             </div>

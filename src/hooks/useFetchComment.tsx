@@ -6,6 +6,7 @@ import { db } from "@src/Firebase";
 interface Comment {
   nickName: string;
   comment: string;
+  photoURL?: string;
 }
 
 const fetchComment = async (id: string | undefined = "") => {

@@ -6,6 +6,7 @@ import { db } from "@src/Firebase";
 interface Info {
   nickName: string;
   comment: string;
+  photoURL?: string;
 }
 
 interface MutationProps {
