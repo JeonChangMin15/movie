@@ -42,7 +42,7 @@ export const Info = ({ data }: InfoProps) => {
           <div className="flex justify-center">
             <img
               src={`https://image.tmdb.org/t/p/w500${data?.poster_path}`}
-              className="w-80 h-[300px] px-6"
+              className="w-[380px] h-[300px]"
             />
           </div>
         </div>

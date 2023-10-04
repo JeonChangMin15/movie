@@ -19,11 +19,16 @@ export const Comment = ({ movieId }: CommentProps) => {
   const handleButton = () => {
     const nickName = localStorage.getItem("nickName") || "";
 
-    mutate({ info: { nickName, comment }, movieId });
+    mutate(
+      { info: { nickName, comment }, movieId },
+      {
+        onSuccess: () => setComment(""),
+      }
+    );
   };
 
   return (
-    <div className="px-4 sm:px-28 lg:px-44 py-5">
+    <div className="px-4 sm:px-20 lg:px-40 py-5">
       <p className="text-2xl">코멘트</p>
       {comments?.length === 0 ? (
         <div className="flex items-center justify-center my-5 h-40 sm:h-60 w-full bg-gray-200 sm:text-xl lg:text-2xl">
@@ -47,12 +52,14 @@ export const Comment = ({ movieId }: CommentProps) => {
       <textarea
         onChange={handleComment}
         className="outline-0 border-[1px]	border-gray-400	w-full h-20 resize-none"
+        value={comment}
+        placeholder="코멘트를 입력해주세요"
       ></textarea>
       <div className="flex justify-end mt-3">
         <button
-          disabled={isLoading}
+          disabled={isLoading || comment.length === 0}
           onClick={handleButton}
-          className="px-4 py-2 text-white	bg-blue-400	hover:bg-blue-600 active:bg-blue-400"
+          className="px-4 py-2 text-white	bg-blue-500	hover:bg-blue-600 active:bg-blue-400 disabled:bg-blue-200"
         >
           댓글달기
         </button>
