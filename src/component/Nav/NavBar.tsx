@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 
@@ -15,8 +16,8 @@ export const NavBar = () => {
 
   const handleLogout = async () => {
     const accessToken = localStorage.getItem("access_token");
-    const signout = await signOut(auth);
-    const { data } = await axios.post(
+    await signOut(auth);
+    await axios.post(
       "https://kapi.kakao.com/v1/user/logout",
       {},
       {

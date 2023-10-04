@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -56,7 +55,7 @@ const KaKaoAuth = () => {
           userData
         );
 
-        const loginInfo = await signInWithCustomToken(auth, customToken.token);
+        await signInWithCustomToken(auth, customToken.token);
 
         navigate("/");
       } catch (error) {
