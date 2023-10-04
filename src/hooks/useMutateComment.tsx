@@ -1,5 +1,6 @@
-import { useMutation, MutationKey } from "react-query";
+import { useMutation, MutationKey, useQueryClient } from "react-query";
 import { doc, updateDoc, arrayUnion, getDoc, setDoc } from "firebase/firestore";
+
 import { db } from "@src/Firebase";
 
 interface Info {
@@ -12,7 +13,7 @@ interface MutationProps {
   movieId?: string;
 }
 
-export const useMutateComment = () => {
+export const useMutateComment = (movieId: string | undefined = "") => {
   const addComment = async (info: Info, movieId: string | undefined = "") => {
     const docRef = doc(db, "movie_comment", movieId);
 
@@ -30,9 +31,17 @@ export const useMutateComment = () => {
     }
   };
 
-  const { mutate } = useMutation<void, unknown, MutationProps, MutationKey>({
+  const queryClient = useQueryClient();
+
+  const { mutate, isLoading } = useMutation<
+    void,
+    unknown,
+    MutationProps,
+    MutationKey
+  >({
     mutationFn: ({ info, movieId }: MutationProps) => addComment(info, movieId),
+    onSuccess: () => queryClient.invalidateQueries(["comment", movieId]),
   });
 
-  return { mutate };
+  return { mutate, isLoading };
 };
