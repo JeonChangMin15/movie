@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 
+import { selectLogin } from "@src/redux/feature/login/loginSlice";
+import { useAppSelector } from "@src/redux/hooks";
 import { useFetchComment } from "@src/hooks/useFetchComment";
 import { useMutateComment } from "@src/hooks/useMutateComment";
 
@@ -10,6 +12,7 @@ interface CommentProps {
 
 export const Comment = ({ movieId }: CommentProps) => {
   const [comment, setComment] = useState("");
+  const isLogin = useAppSelector(selectLogin);
   const { mutate, isLoading } = useMutateComment(movieId);
   const { data: comments } = useFetchComment(movieId);
 
@@ -65,11 +68,13 @@ export const Comment = ({ movieId }: CommentProps) => {
         onChange={handleComment}
         className="outline-0 border-[1px]	border-gray-400	w-full h-20 resize-none"
         value={comment}
-        placeholder="코멘트를 입력해주세요"
+        placeholder={
+          !isLogin ? "로그인 후 코멘트를 작성해주세요" : "코멘트를 작성해주세요"
+        }
       ></textarea>
       <div className="flex justify-end mt-3">
         <button
-          disabled={isLoading || comment.length === 0}
+          disabled={isLoading || comment.length === 0 || !isLogin}
           onClick={handleButton}
           className="px-4 py-2 text-white	bg-blue-500	hover:bg-blue-600 active:bg-blue-400 disabled:bg-blue-200"
         >

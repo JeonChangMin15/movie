@@ -1,11 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { signOut, onAuthStateChanged } from "firebase/auth";
-
-import { auth } from "@src/Firebase";
 import axios from "axios";
 
+import { auth } from "@src/Firebase";
+import { useAppSelector, useAppDispatch } from "@src/redux/hooks";
+import {
+  login,
+  logout,
+  selectLogin,
+} from "@src/redux/feature/login/loginSlice";
+
 export const NavBar = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const isLogin = useAppSelector(selectLogin);
+  const dispatch = useAppDispatch();
 
   const handleLogin = () => {
     window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${
@@ -29,10 +36,11 @@ export const NavBar = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
+      console.log("auth", authUser);
       if (authUser !== null) {
-        setIsLogin(true);
+        dispatch(login());
       } else {
-        setIsLogin(false);
+        dispatch(logout());
       }
     });
 

@@ -3,9 +3,11 @@ import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 
 import "./index.css";
 import { Loading } from "./component/common/Loading";
+import { store } from "./redux/store";
 import { NavBar } from "./component/Nav/NavBar";
 
 const List = React.lazy(() => import("@src/routes/List"));
@@ -27,10 +29,12 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <QueryClientProvider client={queryClient}>
-    <NavBar />
-    <Suspense fallback={<Loading />}>
-      <RouterProvider router={router} />
-    </Suspense>
-    <ReactQueryDevtools initialIsOpen={false} />
+    <Provider store={store}>
+      <NavBar />
+      <Suspense fallback={<Loading />}>
+        <RouterProvider router={router} />
+      </Suspense>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </Provider>
   </QueryClientProvider>
 );
