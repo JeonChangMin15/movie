@@ -1,21 +1,24 @@
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import { MovieList } from "@src/types/query";
-import { ContentT } from "@src/types/state";
+import {
+  addPage,
+  selectContent,
+  addPoster,
+} from "@src/redux/feature/poster/posterSlice";
+import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 
-export const useInfiniteScroll = (
-  data: MovieList | undefined,
-  setPage: Dispatch<SetStateAction<number>>
-) => {
-  const [content, setContent] = useState<ContentT[]>([]);
+export const useInfiniteScroll = (data: MovieList | undefined) => {
+  const currentContent = useAppSelector(selectContent);
   const ref = useRef<HTMLDivElement>(null);
+
+  const dispatch = useAppDispatch();
 
   const handleIntersection = (entries: IntersectionObserverEntry[]) => {
     const [entry] = entries;
-    const MAX_PAGE = 10;
 
     if (entry.isIntersecting) {
-      setPage((prevPage) => (prevPage < MAX_PAGE ? prevPage + 1 : MAX_PAGE));
+      dispatch(addPage());
     }
   };
 
@@ -55,8 +58,10 @@ export const useInfiniteScroll = (
       })
     );
 
-    setContent((prev) => [...prev, ...info]);
+    if (data.page * 20 !== currentContent.length) {
+      dispatch(addPoster(info));
+    }
   }, [data?.page]);
 
-  return { content, ref };
+  return { ref, currentContent };
 };
