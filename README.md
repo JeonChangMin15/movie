@@ -1,27 +1,44 @@
-# React + TypeScript + Vite
+## Cinema Inside
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Cinema inside는 최신 영화 리스트를 제공하고 원하는 영화를 검색할 수 있습니다. 영화에 대한 리뷰도 작성이 가능합니다
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 프로젝트 정보
 
-## Expanding the ESLint configuration
+- 프로젝트 기간: 2023년 8월 18일부터 2023년 10월 5일까지 (3주간)
+- 구성원: 전창민 (1인 개발)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+### 기술 스택
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+- 프론트 엔드:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+  - React
+  - Vite
+  - TypeScript
+  - Tailwind Css
+  - d3
+
+- 상태관리:
+
+  - Redux
+  - React Query
+
+- 백엔드 / 데이터베이스
+
+  - Firebase
+  - FireStore
+  - Cloud Functions
+
+- open api
+
+  - Kakao login api
+  - The movie db api
+
+---
+
+### 배포
+
+프로젝트는 현재 [프로젝트 링크](https://du2pzfii5yqfd.cloudfront.net)에서 확인하실 수 있습니다.
