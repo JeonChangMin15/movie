@@ -1,9 +1,12 @@
-import { useEffect } from "react";
-import { signOut, onAuthStateChanged } from "firebase/auth";
 import axios from "axios";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import { HiChatBubbleOvalLeft } from "react-icons/hi2";
 
 import { auth } from "@src/Firebase";
 import { useAppSelector, useAppDispatch } from "@src/redux/hooks";
+import { handleChart } from "@src/redux/feature/chart/chartSlice";
 import {
   login,
   logout,
@@ -11,6 +14,8 @@ import {
 } from "@src/redux/feature/login/loginSlice";
 
 export const NavBar = () => {
+  const navigate = useNavigate();
+
   const isLogin = useAppSelector(selectLogin);
   const dispatch = useAppDispatch();
 
@@ -36,7 +41,6 @@ export const NavBar = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
-      console.log("auth", authUser);
       if (authUser !== null) {
         dispatch(login());
       } else {
@@ -51,12 +55,35 @@ export const NavBar = () => {
 
   return (
     <div className="w-full h-24 flex flex-row justify-between items-center px-5 lg:px-20 shadow-lg">
-      <span>Menu</span>
-      <span>Cinema inside</span>
+      <span className="inline sm:hidden">Menu</span>
+      <span
+        className="hidden sm:inline hover:cursor-pointer"
+        onClick={() => dispatch(handleChart())}
+      >
+        Chart
+      </span>
+      <span
+        onClick={() => navigate("/")}
+        className="text-base font-normal sm:text-xl sm:font-semibold hover:cursor-pointer"
+      >
+        Cinema inside
+      </span>
       {!isLogin ? (
-        <button onClick={handleLogin}>Login</button>
+        <button
+          onClick={handleLogin}
+          className="flex items-center justify-center gap-x-2 bg-yellow-300 hover:bg-yellow-400 px-2 py-1 sm:px-6 sm:py-3 rounded-lg"
+        >
+          <HiChatBubbleOvalLeft className="w-3 h-3 sm:w-5 sm:h-5" />
+          <span>Login</span>
+        </button>
       ) : (
-        <button onClick={handleLogout}>Logout</button>
+        <button
+          onClick={handleLogout}
+          className="flex items-center justify-center gap-x-2 bg-yellow-300 hover:bg-yellow-400 px-2 py-1 sm:px-6 sm:py-3 rounded-lg"
+        >
+          <HiChatBubbleOvalLeft className="w-3 h-3 sm:w-5 sm:h-5" />
+          <span>Logout</span>
+        </button>
       )}
     </div>
   );

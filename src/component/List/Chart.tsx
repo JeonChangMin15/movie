@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import * as d3 from "d3";
 
+import { useAppSelector } from "@src/redux/hooks";
+import { selectIsShow } from "@src/redux/feature/chart/chartSlice";
 import { ContentT } from "@src/types/state";
 import { getChartData, getRandomColor } from "@src/utils/chart";
 
@@ -9,6 +11,7 @@ interface ChartProps {
 }
 
 export const Chart = ({ content }: ChartProps) => {
+  const isShow = useAppSelector(selectIsShow);
   const svgRef = useRef<SVGSVGElement | null>(null);
 
   useEffect(() => {
@@ -64,7 +67,7 @@ export const Chart = ({ content }: ChartProps) => {
   }, [content?.length]);
 
   return (
-    <div className="hidden sm:flex justify-center ">
+    <div className={`hidden sm:${isShow ? "flex" : "hidden"} justify-center`}>
       <svg ref={svgRef} width={800} height={300}></svg>
     </div>
   );
