@@ -1,15 +1,17 @@
 import { useEffect, useRef } from "react";
 
-import { MovieList } from "@src/types/query";
-import {
-  addPage,
-  selectContent,
-  addPoster,
-} from "@src/redux/feature/poster/posterSlice";
+import { addPage, selectPage } from "@src/redux/feature/poster/posterSlice";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
+import {
+  fetchPosterByPage,
+  selectThunkPoster,
+  selectThunkIsState,
+} from "@src/redux/feature/poster/thunkposterSlice";
 
-export const useInfiniteScroll = (data: MovieList | undefined) => {
-  const currentContent = useAppSelector(selectContent);
+export const useInfiniteScroll = () => {
+  const currentPage = useAppSelector(selectPage);
+  const thunkPoster = useAppSelector(selectThunkPoster);
+  const thunkIsState = useAppSelector(selectThunkIsState);
   const ref = useRef<HTMLDivElement>(null);
 
   const dispatch = useAppDispatch();
@@ -46,22 +48,10 @@ export const useInfiniteScroll = (data: MovieList | undefined) => {
   }, [ref]);
 
   useEffect(() => {
-    if (!data?.page) return;
-
-    const info = data.results.map(
-      ({ title, poster_path, vote_average, genre_ids, id }) => ({
-        title,
-        poster_path,
-        vote_average,
-        genre_ids,
-        id,
-      })
-    );
-
-    if (data.page * 20 !== currentContent.length) {
-      dispatch(addPoster(info));
+    if (currentPage * 20 !== thunkPoster.length) {
+      dispatch(fetchPosterByPage(currentPage));
     }
-  }, [data?.page]);
+  }, [currentPage]);
 
-  return { ref, currentContent };
+  return { ref, thunkIsState, thunkPoster };
 };
