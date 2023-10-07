@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-import { addPage, selectPage } from "@src/redux/feature/poster/posterSlice";
+import { addPage, selectPage } from "@src/redux/feature/poster/pageSlice";
 import { useAppDispatch, useAppSelector } from "@src/redux/hooks";
 import {
   fetchPosterByPage,
