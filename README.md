@@ -42,3 +42,28 @@ Cinema inside는 최신 영화 리스트를 제공하고 원하는 영화를 검
 
   - Kakao login api
   - The movie db api
+
+### 디렉토리 구조
+
+```
+├── public
+└── src
+    ├── assets
+    ├── component
+    │   ├── Detail
+    │   ├── List
+    │   ├── Nav
+    │   ├── Search
+    │   ├── common
+    │   └── icon
+    ├── constants
+    ├── hooks
+    ├── redux
+    │   └── feature
+    │       ├── chart
+    │       ├── login
+    │       └── poster
+    ├── routes
+    ├── types
+    └── utils
+```
