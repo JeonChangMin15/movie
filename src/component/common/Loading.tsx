@@ -1,4 +1,8 @@
-export const Loading = () => {
+interface LoadingProps {
+  text?: string;
+}
+
+export const Loading = ({ text }: LoadingProps) => {
   return (
     <div
       role="status"
@@ -20,7 +24,7 @@ export const Loading = () => {
           fill="currentFill"
         />
       </svg>
-      <span>Loading...</span>
+      <span>{text}</span>
     </div>
   );
 };

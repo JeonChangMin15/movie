@@ -79,7 +79,7 @@ const KaKaoAuth = () => {
 
   return (
     <div>
-      <Loading />
+      <Loading text="Loading..." />
     </div>
   );
 };

@@ -19,7 +19,9 @@ const fetchDetail = async (id: string | undefined) => {
 };
 
 export const useFetchDetail = (id: string | undefined) => {
-  const { data } = useQuery<MovieInfo>(["detail", id], () => fetchDetail(id));
+  const { data, isLoading } = useQuery<MovieInfo>(["detail", id], () =>
+    fetchDetail(id)
+  );
 
-  return { data };
+  return { data, isLoading };
 };
