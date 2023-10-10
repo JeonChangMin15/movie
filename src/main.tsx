@@ -35,7 +35,6 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <QueryClientProvider client={queryClient}>
     <Provider store={store}>
-      {/* <NavBar /> */}
       <Suspense fallback={<Loading />}>
         <RouterProvider router={router} />
       </Suspense>

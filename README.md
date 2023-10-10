@@ -48,7 +48,6 @@ Cinema inside는 최신 영화 리스트를 제공하고 원하는 영화를 검
 ```
 ├── public
 └── src
-    ├── assets
     ├── component
     │   ├── Detail
     │   ├── List
