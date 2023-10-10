@@ -4,6 +4,12 @@ Cinema inside는 최신 영화 리스트를 제공하고 원하는 영화를 검
 
 ---
 
+### 배포
+
+프로젝트는 현재 [프로젝트 링크](https://du2pzfii5yqfd.cloudfront.net)에서 확인하실 수 있습니다.
+
+---
+
 ### 프로젝트 정보
 
 - 프로젝트 기간: 2023년 8월 18일 ~ 2023년 10월 5일 (3주)
@@ -16,10 +22,10 @@ Cinema inside는 최신 영화 리스트를 제공하고 원하는 영화를 검
 - 프론트 엔드:
 
   - React
-  - Vite
   - TypeScript
   - Tailwind Css
   - d3
+  - aws S3, aws CloudFront(배포)
 
 - 상태관리:
 
@@ -36,9 +42,3 @@ Cinema inside는 최신 영화 리스트를 제공하고 원하는 영화를 검
 
   - Kakao login api
   - The movie db api
-
----
-
-### 배포
-
-프로젝트는 현재 [프로젝트 링크](https://du2pzfii5yqfd.cloudfront.net)에서 확인하실 수 있습니다.
