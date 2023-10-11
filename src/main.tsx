@@ -15,7 +15,13 @@ const Detail = React.lazy(() => import("@src/routes/Detail"));
 const Search = React.lazy(() => import("@src/routes/Search"));
 const Auth = React.lazy(() => import("@src/routes/Auth"));
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60,
+    },
+  },
+});
 
 const router = createBrowserRouter([
   {
